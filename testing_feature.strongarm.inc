@@ -14,7 +14,7 @@ function testing_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_testing_feature';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-print';
   $export['additional_settings__active_tab_testing_feature'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -157,10 +157,10 @@ function testing_feature_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -225,7 +225,7 @@ function testing_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_display_urllist_testing_feature';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_display_urllist_testing_feature'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -239,7 +239,7 @@ function testing_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_mail_display_testing_feature';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['print_mail_display_testing_feature'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -267,7 +267,7 @@ function testing_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_pdf_display_urllist_testing_feature';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_pdf_display_urllist_testing_feature'] = $strongarm;
 
   $strongarm = new stdClass();

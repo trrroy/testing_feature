@@ -5,3 +5,71 @@
  */
 
 include_once 'testing_feature.features.inc';
+
+function testing_feature_menu() {
+  $items['test-txt/%'] = array(
+    'title' => 'tests file output',
+    'page callback' => '_testing_feature_txt_function',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function _testing_feature_txt_function($test_id) {
+  //dpm($test_id);
+  if (!$test_id) { return "No test found here"; }
+  $node = node_load($test_id);
+  //print_r($node);
+  //drupal_set_header('Content-Type: text/plain');
+  echo "#output from http://www.doing-more.com/test-txt/" . $test_id . "\n\n";
+  echo _testing_feature_scenarios_tags($node->field_test_tags) . "\n";
+  echo "Feature:" . $node->title . "\n";
+  echo _indent_spaces($node->body['und'][0]['safe_value'],2) . "\n";
+  echo _testing_feature_scenarios_txt($node->field_scenarios);
+  // echo scenarios here
+  exit();
+}
+
+function _testing_feature_scenarios_txt($scenarios) {
+  $output = "";
+  if (isset($scenarios['und']) && count($scenarios['und']) > 1) {
+    foreach ($scenarios['und'] as $item) {
+      $fc = current(entity_load('field_collection_item', array($item['value'])));
+      //print_r($fc);
+      //print "\n-------------------------------\n";
+      $output .= (isset($fc->field_test_tags['und'])) ? _indent_spaces(_testing_feature_scenarios_tags($fc->field_test_tags),2) : NULL;
+      $output .= (isset($fc->field_scenario_description['und'])) ? _indent_spaces($fc->field_scenario_type['und'][0]['value'] . ": " . $fc->field_scenario_description['und'][0]['value'],2) . "\n" : NULL;
+      $output .= (isset($fc->field_scenario_steps['und'])) ? _indent_spaces("Steps:" . _indent_spaces($fc->field_scenario_steps['und'][0]['value'],2),4) . "\n" : NULL;
+      $output .= (isset($fc->field_scenario_examples['und'])) ? _indent_spaces("Examples:" . _indent_spaces($fc->field_scenario_examples['und'][0]['value'],2),4) . "\n\n" : NULL;
+    }
+  }
+  return $output;
+}
+
+function _testing_feature_scenarios_tags($tags) {
+  $output = "";
+  if (isset($tags['und']) && count($tags['und']) > 0) {
+    foreach ($tags['und'] as $item) {
+      $term = taxonomy_term_load($item['tid']);
+      $output .= '@' . $term->name . ' ';
+    }
+  }
+  return $output;
+}
+
+function _indent_spaces($txt,$num) {
+  $patterns = array();
+  $patterns[0] = '/^/';
+  $patterns[1] = '/\n/';
+  $patterns[2] = '/\r/';
+  $replacements = array();
+  $replacements[0] = chr(10);
+  $replacements[1] = chr(10);
+  $replacements[2] = NULL;
+  for ($i = 0; $i < $num; $i++) {
+    $replacements[1] .= ' ';
+  }
+  return preg_replace($patterns, $replacements, $txt);
+}

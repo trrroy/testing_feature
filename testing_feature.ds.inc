@@ -17,20 +17,25 @@ function testing_feature_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'field_scenarios';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'field_scenario_examples' => array(
+    'field_scenario_description' => array(
       'ft' => array(
         'func' => 'theme_ds_field_expert',
-        'fis' => TRUE,
-        'fis-el' => 'pre',
-        'fis-cl' => '',
+        'fi' => TRUE,
+        'fi-el' => 'strong',
+        'fi-cl' => '',
       ),
     ),
     'field_scenario_steps' => array(
       'ft' => array(
         'func' => 'theme_ds_field_expert',
-        'fis' => TRUE,
-        'fis-el' => 'pre',
-        'fis-cl' => '',
+        'lb' => 'Steps',
+        'lb-el' => 'em',
+        'ow' => TRUE,
+        'ow-el' => 'blockquote',
+        'ow-cl' => '',
+        'fi' => TRUE,
+        'fi-el' => 'pre',
+        'fi-cl' => '',
       ),
     ),
   );
@@ -80,19 +85,13 @@ function testing_feature_ds_layout_settings_info() {
     'hide_sidebars' => 0,
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_scenario_type',
-        1 => 'field_test_tags',
-        2 => 'field_scenario_description',
-        3 => 'field_scenario_steps',
-        4 => 'field_scenario_examples',
+        0 => 'field_scenario_description',
+        1 => 'field_scenario_steps',
       ),
     ),
     'fields' => array(
-      'field_scenario_type' => 'ds_content',
-      'field_test_tags' => 'ds_content',
       'field_scenario_description' => 'ds_content',
       'field_scenario_steps' => 'ds_content',
-      'field_scenario_examples' => 'ds_content',
     ),
     'classes' => array(),
   );

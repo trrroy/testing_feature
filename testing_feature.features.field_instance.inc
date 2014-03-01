@@ -51,11 +51,11 @@ function testing_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'full' => array(
         'label' => 'inline',
@@ -94,9 +94,8 @@ function testing_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'full' => array(
@@ -130,7 +129,14 @@ function testing_feature_field_default_field_instances() {
   // Exported field_instance: 'field_collection_item-field_scenarios-field_scenario_steps'
   $field_instances['field_collection_item-field_scenarios-field_scenario_steps'] = array(
     'bundle' => 'field_scenarios',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Given I am on "/"
+And the response status code should be 200 
+Then I should see... 
+',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Starts with:
 - Given
@@ -144,7 +150,7 @@ function testing_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'above',
@@ -189,10 +195,9 @@ function testing_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'inline',
@@ -228,10 +233,9 @@ function testing_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -273,7 +277,7 @@ I need to: ',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -303,7 +307,45 @@ I need to: ',
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-testing_feature-field_project'
+  $field_instances['node-testing_feature-field_project'] = array(
+    'bundle' => 'testing_feature',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'node_reference',
+        'settings' => array(),
+        'type' => 'node_reference_plain',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_project',
+    'label' => 'Project',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
     ),
   );
 
@@ -318,10 +360,14 @@ I need to: ',
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
+          'add' => 'Add',
+          'delete' => '',
+          'description' => 1,
+          'edit' => 'Edit',
           'view_mode' => 'full',
         ),
-        'type' => 'field_collection_fields',
-        'weight' => 2,
+        'type' => 'field_collection_view',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -343,7 +389,7 @@ I need to: ',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -359,7 +405,7 @@ I need to: ',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -385,7 +431,7 @@ I need to: ',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -395,6 +441,7 @@ I need to: ',
   t('Comment');
   t('Description');
   t('Examples (only used if Scenario Type == "Scenario Outline")');
+  t('Project');
   t('Scenario Description');
   t('Scenario Type');
   t('Scenarios');
