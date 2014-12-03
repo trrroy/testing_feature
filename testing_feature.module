@@ -34,7 +34,7 @@ function _testing_feature_txt_function($test_id) {
 
 function _testing_feature_scenarios_txt($scenarios) {
   $output = "";
-  if (isset($scenarios['und']) && count($scenarios['und']) > 1) {
+  if (isset($scenarios['und']) && count($scenarios['und']) > 0) {
     foreach ($scenarios['und'] as $item) {
       $fc = current(entity_load('field_collection_item', array($item['value'])));
       //print_r($fc);
