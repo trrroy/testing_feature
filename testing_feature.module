@@ -7,6 +7,13 @@
 include_once 'testing_feature.features.inc';
 
 function testing_feature_menu() {
+  $items['test-list/%'] = array(
+    'title' => 'tests list output',
+    'page callback' => '_testing_feature_list_function',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
   $items['test-txt/%'] = array(
     'title' => 'tests file output',
     'page callback' => '_testing_feature_txt_function',
@@ -15,6 +22,13 @@ function testing_feature_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+function _testing_feature_list_function($project_id) {
+  $results = db_query("SELECT node.title AS node_title, node.nid AS nid FROM node node LEFT JOIN field_data_field_project field_data_field_project ON node.nid = field_data_field_project.entity_id AND (field_data_field_project.entity_type = 'node' AND field_data_field_project.deleted = '0') LEFT JOIN field_data_field_scenarios field_data_field_scenarios ON node.nid = field_data_field_scenarios.entity_id AND (field_data_field_scenarios.entity_type = 'node' AND field_data_field_scenarios.deleted = '0') WHERE (( (node.status = '1') AND (node.type IN  ('testing_feature')) AND (field_data_field_project.field_project_nid IN  (:project_nid)) )) ORDER BY node_title ASC", array(':project_nid' => $project_id))->fetchAll();
+  echo 'project id: ' . $project_id;
+  //echo json_encode($results);
+  exit;
 }
 
 function _testing_feature_txt_function($test_id) {
